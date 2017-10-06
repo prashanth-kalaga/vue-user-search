@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>github-users-vue-rx</title>
+    <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/vue-material@0.7.5/dist/vue-material.css">
+    <script src="https://unpkg.com/vue-material@0.7.5/dist/vue-material.js"></script>
+  </head>
+  <body>
+    <div id="demo">
+      <md-toolbar>
+        <h1 class="md-title">Github User Search</h1>
+      </md-toolbar>
+  
+    <md-input-container>
+        <label>Search a User by name or email from GitHub</label>
+        <md-input v-model="searchInput"></md-input>
+    <md-button class="md-icon-button" v-on:click="searchUsers">
+      <md-icon>search</md-icon>
+    </md-button>
+    </md-input-container>
+
+
+<md-table-card>
+  <md-toolbar>
+    <h1 class="md-title">Github Users</h1>
+    <md-button class="md-icon-button">
+      <md-icon>filter_list</md-icon>
+    </md-button>
+  </md-toolbar>
+
+  <md-table md-sort="dessert" md-sort-type="desc">
+    <md-table-header>
+      <md-table-row>
+        <md-table-head md-sort-by="Name">User Name</md-table-head>
+        <md-table-head md-sort-by="Id">User Id</md-table-head>
+        <md-table-head md-sort-by="score" md-numeric>Score</md-table-head>
+        <md-table-head>
+          <md-icon>message</md-icon>
+          <span>Comments</span>
+        </md-table-head>
+      </md-table-row>
+    </md-table-header>
+
+    <md-table-body>
+      <md-table-row v-for="(record,rIdx) in users" :key="rIdx" :md-item="record" md-auto-select md-selection>
+        <md-table-cell>
+          <a :href="record.html_url" target="_blank" class="commit">{{ record.login }} </a>
+        </md-table-cell>
+        <md-table-cell>
+          <a :href="record.avatar_url" target="_blank" class="commit">{{ record.id }} </a>
+        </md-table-cell>
+        <md-table-cell> {{ record.score }}</md-table-cell>
+      </md-table-row>
+    </md-table-body>
+  </md-table>
+  <md-table-pagination :md-size="5" :md-total="10" :md-page="1" md-label="Users" md-separator="of" :md-page-options="[5, 10, 25, 50]" v-model="pagesize"> </md-table-pagination>
+</md-table-card>
+    </div>
+    <script src="./main.js"></script>
+
+  </body>
+</html>
